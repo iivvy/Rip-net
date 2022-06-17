@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr">
+
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Student - Dashboard</title>
+
+        <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+        <meta name="robots"
+              content="noindex">
+
+        <!-- Custom Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap"
+              rel="stylesheet">
+
+              <link type="text/css"
+              href="{% static 'assets/vendor/perfect-scrollbar.css'  %}"
+              rel="stylesheet">
+
+        <!-- Material Design Icons -->
+        <link type="text/css"
+              href="{% static 'assets/css/material-icons.css'  %}"
+              rel="stylesheet">
+
+        <!-- Font Awesome Icons -->
+        <link type="text/css"
+              href="{% static 'assets/css/fontawesome.css'  %}"
+              rel="stylesheet">
+
+        <!-- Preloader -->
+        <link type="text/css"
+              href="{% static 'assets/vendor/spinkit.css'  %}"
+              rel="stylesheet">
+
+        <!-- App CSS -->
+        <link type="text/css"
+              href="{% static 'assets/css/app.css'  %}"
+              rel="stylesheet">
+
+    </head>
+
+    <body class=" layout-fluid">
+
+        <style>
+            .title {
+                background: green;
+                color: #fff;
+                padding: 5px;
+                text-align: center;
+                border: 1px solid;
+            }
+    
+            .menu {
+                background: blue;
+                color: #fff;
+                padding: 5px;
+                text-align: center;
+                border: 1px solid;
+            }
+    
+            .insidemodal {
+                background: red;
+                border: 1px solid;
+                padding: 5px;
+            }
+    
+            .modal-backdrop {
+                display: none
+            }
+    
+            .modal-backdrop.in {
+                opacity: 0;
+            }
+    
+            .modal {
+                z-index: inherit !important;
+                position: relative;
+            }
+        </style>
+    
+
+        <div class="preloader">
+            <div class="sk-chase">
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+                <div class="sk-chase-dot"></div>
+            </div>
+
+            <!-- <div class="sk-bounce">
+    <div class="sk-bounce-dot"></div>
+    <div class="sk-bounce-dot"></div>
+  </div> -->
+
+            <!-- More spinner examples at https://github.com/tobiasahlin/SpinKit/blob/master/examples.html -->
+        </div>
+
+        <!-- Header Layout -->
+        <div class="mdk-header-layout js-mdk-header-layout">
+
+            <!-- Header -->
+
+            <div id="header"
+                 data-fixed
+                 class="mdk-header js-mdk-header mb-0">
+                <div class="mdk-header__content">
+
+                    <!-- Navbar -->
+                    <nav id="default-navbar"
+                         class="navbar navbar-expand navbar-dark bg-primary m-0">
+                        <div class="container-fluid">
+                            <!-- Toggle sidebar -->
+                            <button class="navbar-toggler d-block"
+                                    data-toggle="sidebar"
+                                    type="button">
+                                <span class="material-icons">menu</span>
+                            </button>
+
+                            <!-- Brand -->
+                            <a href="student-dashboard.html"
+                               class="navbar-brand">
+                                 <img src="assets/images/logo/Modern Public Library Logo.svg"
+                                     class="mr-2"
+                                     alt="LearnPlus" /> 
+                                     
+                                <span class="d-none d-xs-md-block">UpLearn</span>
+                            </a>
+
+                         
+
+                            <div class="flex"></div>
+
+                           
+                                
+                            </ul>
+                            <!-- // END Menu -->
+                        </div>
+                    </nav>
+                    <!-- // END Navbar -->
+
+                </div>
+            </div>
+
+            <!-- // END Header -->
+
+            <!-- Header Layout Content -->
+            <div class="mdk-header-layout__content">
+
+                <div data-push
+                     data-responsive-width="992px"
+                     class="mdk-drawer-layout js-mdk-drawer-layout">
+                    <div class="mdk-drawer-layout__content page ">
+
+                        <div class="container-fluid page__container">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="student-dashboard.html">Home</a></li>
+                                <li class="breadcrumb-item active">vlan-config</li>
+                            </ol>
+                            <h1 class="h2">VLAN CONFIGURATION</h1>
+                            <h3 class="h2">create vlan </h4>
+                                 <form action="/add-vlan" method="post">
+                                    {% csrf_token %}
+                                <div class="row">
+                                        
+                                    <div class="col-md-6">
+                                        <input id="name"
+                                               name="username"
+                                               type="text"
+                                               class="form-control"
+                                               
+                                               placeholder="Username">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="password"
+                                               name="password"
+                                               class="form-control"
+                                               placeholder="Password"
+                                               >
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input id="ip_address"
+                                               name="ip_address"
+                                               type="text"
+                                               class="form-control"                                                 
+                                               placeholder="IP Address">
+                                    </div>
+                            
+                                </div>
+                                <br>
+                                <br>
+
+                                
+                                    
+                                        <!--<div class="form-group">
+                                        <label for="exampleInputEmail1">Vlan id</label>
+                                        <input name="vlan_id" class="form-control"  placeholder="valn id ">
+                                        
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputPassword1">Name</label>
+                                        <input name="name"  class="form-control"  placeholder="name">
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputPassword1">type</label>
+                                        <div class="col-md-9">
+                                            <select class="form-control input-height" name="type" id="exampleInputPassword1">
+                                                <option value="">type...</option>
+                                                <option value="">simple</option>
+                                                <option value="private-vlan primary">primary</option>
+                                                <option value="private-vlan comunity">comunity</option>
+                                                <option value="private-vlan isolate">isolate</option>
+                                            </select>
+                                        </div>
+                                        <input name="type"  class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                        </div>
+                                    
+                                        
+                                <div class="modal-footer">
+                                        <button name="do" value="create" type="submit" class="btn btn-primary">Create </button>
+                                        <button name="do" value="delete" type="submit" class="btn btn-primary">Delete </button>
+                                        
+                                </div>
+
+
+
+                           
+                            </form> -->
+                            <div class="container-fluid page__container">
+                                <!-- Modal primary -->
+                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                    style="right: 300px; margin-left:10px ;" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog " role="document">
+                                        <div class="modal-content ">
+                                            <div class="modal-header ">
+                                                <h3 class="modal-title" id="exampleModalLabel">Modal title</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                      
+                                                    <div class="form-group">
+                                                        <label for="name-p">Vlan ID</label>
+                                                        <input name="vlan-id" type="text" class="form-control" id="name-p"
+                                                            placeholder="vlan id">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Vlan Name</label>
+                                                        <input name="name" type="text" class="form-control" id="formGroupExampleInput2"
+                                                            placeholder="optional">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">association</label>
+                                                        <input name="association" type="text" class="form-control" id="formGroupExampleInput2"
+                                                            placeholder="ex: 10,20,30...">
+                                                    </div>
+                     
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button name="do" value="add-primary" type="submit" class="btn btn-success" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal simple -->
+                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header ">
+                                                <h3 class="modal-title" id="exampleModalLabel">Add Vlan</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label for="name">Vlan Id</label>
+                                                        <input name="vlan-id" type="text" class="form-control" id="name"
+                                                            placeholder="vlan id">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="formGroupExampleInput2">Name</label>
+                                                        <input name="name" type="text" class="form-control" id="formGroupExampleInput2"
+                                                            placeholder="Another input">
+                                                    </div>
+                                                   
+                                                    <label for="type">Type</label>
+                                                    <select class="form-control input-height" name="type" id="type">
+                                                        <option value="">type...</option>
+                                                        <option value="">simple</option>                                                            
+                                                        <option value="private-vlan comunity">comunity</option>
+                                                        <option value="private-vlan isolate">isolate</option>
+                                                    </select>
+                                                   
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button name="do" value="add-vlan" type="submit" class="btn btn-success" data-dismiss="modal">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <a href="#" class="btn btn-primary t" data-toggle="modal"
+                                                    data-target="#exampleModal1" style="margin-bottom:20px ;">Primary</a>
+        
+                                                <div class="card">
+                                                    <h4 class="card-header " id="card-header-p">Primary</h4>
+                                                    <div class="card-body">
+                                                        <ul class="list-group text-left" style="padding: 20px;">
+                                                            <li class="list-group-item border-0">
+                                                                <div class="  rounded bg-primary text-white"
+                                                                    style="padding: 10px;    border-color:#0275d8;">
+                                                                    item num 1
+                                                                </div>
+        
+                                                            </li>
+                                                            <li class="list-group-item border-0">
+                                                                <div class="  rounded bg-primary text-white"
+                                                                    style="padding: 10px;   border-color:#0275d8; box-shadow:5px ;">
+                                                                    item num 2
+                                                                </div>
+        
+                                                            </li>
+                                                            <li class="list-group-item border-0">
+                                                                <div class="  rounded bg-primary text-white"
+                                                                    style="padding: 10px;    border-color:#0275d8;">
+                                                                    item num 3
+                                                                </div>
+        
+                                                            </li>
+        
+                                                        </ul>
+                                                    </div>
+                                                    <div class=" dropdown right-0 pr-2 text-right">
+                                                        <a href="#" class="dropdown-toggle text-muted" data-caret="false"
+                                                            data-toggle="dropdown">
+                                                            <span style="font-size: 20px; color: Dodgerblue;">
+                                                                <i class="fa-solid fa-circle-plus fa-2xl"
+                                                                    style="margin-bottom:40px; margin-right:10px;"></i>
+                                                            </span>
+        
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <button class="dropdown-item" style=" outline: none;"
+                                                                href="">orihiuioijrovjelrkjpokpo irjoijvr v oriejvio</button>
+                                                            <button class="dropdown-item" style=" outline: none;"
+                                                                href="">Option2</button>
+        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                            <div class="col-sm-6 text-center">
+                                                <a href="#" class="btn btn-primary t" data-toggle="modal"
+                                                    data-target="#exampleModal2" style="margin-bottom:20px ;">Simple</a>
+                                                <div class="card ">
+                                                    <h4 class="card-header " id="card-header-s">Simple</h4>
+                                                    <div class="card-body">
+                                                        <ul class="list-group text-left" style="padding: 20px;">
+                                                            <li class="list-group-item border-0">
+                                                                <div class="  rounded bg-primary text-white"
+                                                                    style="padding: 10px;   border-color:#0275d8;">
+                                                                    item num 1
+                                                                </div>
+        
+                                                            </li>
+                                                            <li class="list-group-item border-0">
+                                                                <div class="  rounded bg-primary text-white"
+                                                                    style="padding: 10px;   border-color:#0275d8;">
+                                                                    item num 2
+                                                                </div>
+        
+                                                            </li>
+        
+        
+                                                        </ul>
+                                                    </div>
+                                                    <div class=" dropdown right-0 pr-2 text-right">
+                                                        <a href="#" class="dropdown-toggle text-muted" data-caret="false"
+                                                            data-toggle="dropdown">
+                                                            <span style="font-size: 20px; color: Dodgerblue;">
+                                                                <i class="fa-solid fa-circle-plus fa-2xl"
+                                                                    style="margin-bottom:40px; margin-right:10px;"></i>
+                                                            </span>
+        
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <button class="dropdown-item" style=" outline: none;"
+                                                                href="">Option1</button>
+                                                            <button class="dropdown-item" style=" outline: none;"
+                                                                href="">Option2</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        </div> 
+                    </br>
+                    <ul>
+                   {% if  not users %}
+
+                   {% else %}
+               
+                    {% for i in users %}
+                       
+                      <li>{{ i.vlan_id }}</li>
+                    {% endfor %}
+                    {% endif %}
+                    </ul>
+                    </div>
+
+                    <div class="mdk-drawer js-mdk-drawer"
+                         id="default-drawer">
+                        <div class="mdk-drawer__content ">
+                            <div class="sidebar sidebar-left sidebar-dark bg-dark o-hidden"
+                                 data-perfect-scrollbar>
+                                <div class="sidebar-p-y">
+                                 
+                                    
+                                    
+                                    <div class="sidebar-heading">Switch configuration</div>
+                                    <ul class="sidebar-menu sm-active-button-bg">
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="/">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">school</i> Users managment
+                                            </a>
+                                        </li>
+                                        
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="/vlan-config">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i> vlan configuration
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="/interface-trunk">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> interfaces and trunking
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button"
+                                               href="/security">
+                                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">poll</i> Security
+                                            </a>
+                                        </li>
+                                      
+                          
+                                     
+                                    </ul>
+                                   
+                                
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- App Settings FAB -->
+                <div id="app-settings">
+                    <app-settings layout-active="default"
+                                  :layout-location="{
+      'fixed': 'fixed-student-dashboard.html',
+      'default': 'student-dashboard.html'
+    }"
+                                  sidebar-variant="bg-transparent border-0"></app-settings>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- jQuery -->
+         <!-- jQuery -->
+         <script src="{% static 'assets/vendor/jquery.min.js'  %}"></script>
+
+         <!-- Bootstrap -->
+         <script src="{% static 'assets/vendor/popper.min.js'  %}"></script>
+         <script src="{% static 'assets/vendor/bootstrap.min.js'  %}"></script>
+ 
+         <!-- Perfect Scrollbar -->
+         <script src="{% static 'assets/vendor/perfect-scrollbar.min.js'  %}"></script>
+ 
+         <!-- MDK -->
+         <script src="{% static 'assets/vendor/dom-factory.js'  %}"></script>
+         <script src="{% static 'assets/vendor/material-design-kit.js'  %}"></script>
+ 
+         <!-- App JS -->
+         <script src="{% static 'assets/js/app.js'  %}"></script>
+ 
+         <!-- Highlight.js -->
+         <script src="{% static 'assets/js/hljs.js'  %}"></script>
+ 
+         <!-- App Settings (safe to remove) -->
+          <script src="{% static 'assets/js/app-settings.js'  %}"></script> 
+ 
+         <!-- Global Settings -->
+       <script src="{% static 'assets/js/settings.js'  %}"></script> 
+         <!-- Moment.js -->
+         <script src="{% static 'assets/vendor/moment.min.js'  %}"></script>
+         <script src="{% static 'assets/vendor/moment-range.js'  %}"></script>
+ 
+         <!-- Chart.js -->
+         <script src="{% static 'assets/vendor/Chart.min.js'  %}"></script>
+         <script src="{% static 'assets/js/chartjs.js'  %}"></script>
+ 
+         <!-- Student Dashboard Page JS -->
+         <!-- <script src="{% static 'assets/js/chartjs-rounded-bar.js'  %}"></script> -->
+         <script src="{% static 'assets/js/page.student-dashboard.js'  %}"></script>
+ 
+ 
+    </body>
+
+</html>

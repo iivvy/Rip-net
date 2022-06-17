@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr">
+
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>User Managment</title>
+
+        <!-- Prevent the demo from appearing in search engines (REMOVE THIS) -->
+        <meta name="robots"
+              content="noindex">
+        {% load static %}
+
+        <!-- Custom Fonts -->
+        <link href= "https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500%7CRoboto:400,500&display=swap"
+              rel="stylesheet">
+
+        <!-- Perfect Scrollbar -->
+        <link type="text/css"
+              href="{% static 'assets/vendor/perfect-scrollbar.css' %}"
+              rel="stylesheet">
+
+        <!-- Material Design Icons -->
+        <link type="text/css"
+              href="{% static 'assets/css/material-icons.css' %}"
+              rel="stylesheet">
+
+        <!-- Font Awesome Icons -->
+        <link type="text/css"
+              href="{% static 'assets/css/fontawesome.css' %}"
+              rel="stylesheet">
+
+        <!-- Preloader -->
+        <link type="text/css"
+              href="{% static 'assets/vendor/spinkit.css' %}"
+              rel="stylesheet">
+
+        <!-- App CSS -->
+        <link type="text/css"
+              href="{% static 'assets/css/app.css' %}"
+              rel="stylesheet">
+              <link type="text/css"
+              href="{% static '../static/style.css' %}"
+              rel="stylesheet">
+              <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+    </head>
+
+    <body class=" layout-fluid">
+    <style>
+        div.modal{
+            width: 500px;
+            height: 400px;
+        }
+        div.tab{
+            margin-left: 1px;
+            width: 900px;
+        }
+    </style>
+        <form action="/add-network" method="post" >
+            {% csrf_token %}
+        <div id="Home">
+            <h1 >Network Automation</h1>
+            <card max-width="1000px" class="Card">
+              <div class="texts">
+                
+                      <div class="mb-3">
+                          <label for="exampleFormControlInput1" class="form-label">Username </label>
+                          <input name="username" type="text" class="form-control" id="username" placeholder="Username">
+                        </div>
+                      <div class="mb-3">
+                          <label for="name" class="form-label">Password </label>
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" required
+                        maxlength="20" size="20">
+                        
+                      </div>
+                        <div class="mb-3">   
+                          <label for="name" class="form-label">Address </label>
+                <input type="text" class="form-control" id="address" placeholder="IP Address" name="address" required
+                       minlength="7" maxlength="15" size="20">
+                        </div>
+          <div class="btns">
+          <button name="create" type="button"  class="btn btn-outline-primary create" data-toggle="modal" data-target="#exampleModal1">Create RIP Routing</button>
+         
+          <button name="do" value="upgrade" type="submit" class="btn btn-outline-success upgrade">Upgrade RIP Version</button>
+          <button name="do" value="default" type="submit" class="btn btn-outline-primary upgrade">make default route</button>
+          <button name="do" value="config" type="submit" class="btn btn-outline-success upgrade">show configuration</button>
+          <button name="do" value="summary" type="submit" class="btn btn-outline-primary upgrade">Auto Summarization</button>
+        
+
+          </div>
+        </br>
+        </br>
+
+          {% if not confs  %}
+          {% else %}
+          {% for i in confs  %}
+          
+           <p>---> {{ i }}</p>
+          
+          {% endfor %}
+          {% endif %}
+            {% if not config  %}
+            {% else %}
+                <h1>Show Configuration</h1>   
+                <p>{{ config }}</p> 
+            {% endif %}
+         </div>
+            </card>
+
+            <div class="tab-content">
+                <div class="tab-pane active">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <th>Device</th>
+                                <th>RIP Networks</th>
+                            </thead>
+                            <tbody>
+                              {% if not networks  %}
+                              {% else %}
+                              {% for i in networks  %}
+                              <tr>
+                                  <td>{{ i.host }}</td>
+                                  <td>{{ i.network }}</td>
+          
+                                 
+                              </tr>
+                              {% endfor %}
+                              {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+              
+          </div>
+         
+       
+
+              <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                    style="right: 300px; margin-left:500px ; position: fixed" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog " role="document">
+                                        <div class="modal-content ">
+                                            <div class="modal-header ">
+                                                <h3 class="modal-title" id="exampleModalLabel">RIP Networks</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                               
+                                                    <div class="form-group">
+                                                        <label for="name-p">Network IP</label>
+                                                        <input name="network-ip" type="text" class="form-control" id="name-p"
+                                                            placeholder="ip address">
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button name="do" value="add-network" type="submit" class="btn btn-outline-success upgrade">Add</button>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                            </form>
+        <!-- jQuery -->
+        <script src='{% static "assets/vendor/jquery.min.js" %}'></script>
+
+        <!-- Bootstrap -->
+        <script src="{% static 'assets/vendor/popper.min.js' %}"></script>
+        <script src="{% static 'assets/vendor/bootstrap.min.js' %}"></script>
+
+        <!-- Perfect Scrollbar -->
+        <script src="{% static 'assets/vendor/perfect-scrollbar.min.js' %}"></script>
+
+        <!-- MDK -->
+        <script src="{% static 'assets/vendor/dom-factory.js' %}"></script>
+        <script src="{% static 'assets/vendor/material-design-kit.js' %}"></script>
+
+        <!-- App JS -->
+        <script src="{% static 'assets/js/app.js' %}"></script>
+
+        <!-- Highlight.js -->
+        <script src="{% static 'assets/js/hljs.js' %}"></script>
+
+        <!-- App Settings (safe to remove) -->
+        <script src="{% static 'assets/js/app-settings.js' %}"></script>
+
+    </body>
+
+</html>
